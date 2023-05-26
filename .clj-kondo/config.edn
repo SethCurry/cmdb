@@ -1,0 +1,1 @@
+{:hooks {:macroexpand {cmdb.models/model-coll models/model-coll cmdb.models/defmodel models/defmodel}}}

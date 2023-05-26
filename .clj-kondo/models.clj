@@ -1,4 +1,4 @@
-(ns cmdb.models)
+(ns models)
 
 (defmacro model-coll
   {:clj-kondo/ignore [:unresolved-symbol :type-mismatch]}
