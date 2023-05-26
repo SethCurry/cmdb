@@ -1,0 +1,11 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  test:
+    cmds:
+      - lein test
+  deploy:
+    cmds:
+      - lein deploy clojars
