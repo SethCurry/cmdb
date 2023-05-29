@@ -8,13 +8,22 @@
 
 (defn link-label
   [lnk]
-  (get (get lnk :opts) :label))
+  (let [lbl (get (get lnk :opts) :label)]
+    (if (nil? lbl)
+    ""
+    lbl)))
 
 (defn link-has-label?
   [lnk]
-  (if (nil? (link-label lnk))
+  (if (string/blank? (link-label lnk))
     false
     true))
+
+(defn quote-name
+  [obj]
+  (if (string/includes? (get obj :name) " ")
+    (str "\"" (get obj :name) "\"")
+    (get obj :name)))
 
 (defn format-link-label
   [lnk]
@@ -28,7 +37,10 @@
   PUMLObject
   (to-uml [this] (str (to-uml (get this :from)) " -" (get (get this :opts) :direction) "-> " (to-uml (get this :to)) (format-link-label this))))
 
-(defrecord Note [text direction])
+(defrecord Note [target text direction]
+  PUMLObject
+  (to-uml [this]
+    (str "note " (get this :direction) " of " (quote-name this) "\n\t" (get this :text) "\nend note")))
 
 (defrecord Component
            [name opts]
