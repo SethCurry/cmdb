@@ -4,27 +4,33 @@
 (defprotocol HTML
   (to-html [this]))
 
+(defn format-opts
+  [opts]
+  (string/join
+   " "
+   (map (fn [[k v]] (str (name k) "=\"" v "\"")) opts)))
+
 (defrecord A
-           [text href]
+           [text href opts]
   HTML
   (to-html [this]
-    (str "<a href=\"" (get this :href) "\">" (get this :text) "</a>")))
+    (str "<a " (format-opts (get this :opts)) " href=\"" (get this :href) "\">" (get this :text) "</a>")))
 (def a ->A)
 
 (defrecord Div
-           [children]
+           [children opts]
   HTML
   (to-html [this]
     (str "<div>" (string/join "\n" (map to-html (get this :children))) "</div>")))
 (def div ->Div)
 
 (defrecord H1
-           [text]
+           [text opts]
   HTML
   (to-html [this] (str "<h1>" (get this :text) "</h1>")))
 (def h1 ->H1)
 
-(defrecord Table [columns data]
+(defrecord Table [columns data opts]
   HTML
   (to-html [this] ""))
 (def table ->Table)

@@ -32,13 +32,21 @@
 (deftest Link-to-uml
   (testing "Does not have label"
     (is (= (puml/to-uml
-            (puml/link (puml/->Component "test1" {}) (puml/->Component "test2" {})))
+            (puml/link
+             (puml/->Component "test1" {})
+             (puml/->Component "test2" {})))
            "[test1] --> [test2]")))
   (testing "Does have label"
     (is (= (puml/to-uml
-            (puml/link (puml/->Component "test1" {}) (puml/->Component "test2" {}) {:label "test-label"}))
+            (puml/link
+             (puml/->Component "test1" {})
+             (puml/->Component "test2" {}) 
+             {:label "test-label"}))
            "[test1] --> [test2] : test-label")))
   (testing "Has direction"
     (is (= (puml/to-uml
-            (puml/link (puml/->Component "test1" {}) (puml/->Component "test2" {}) {:label "test-label" :direction "up"}))
+            (puml/link
+             (puml/->Component "test1" {})
+             (puml/->Component "test2" {})
+             {:label "test-label" :direction "up"}))
            "[test1] -up-> [test2] : test-label"))))
