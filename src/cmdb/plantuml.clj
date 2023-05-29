@@ -28,7 +28,7 @@
 (defn format-link-label
   [lnk]
   (let [lbl (link-label lnk)]
-    (if (nil? lbl)
+    (if (not (link-has-label? lnk))
       ""
       (str " : " lbl))))
 

@@ -20,3 +20,11 @@
   (testing "link has no label"
     (is (= (puml/link-label (puml/->Link {} {} {}))
            ""))))
+
+(deftest format-link-label
+  (testing "Does not have link"
+    (is (= (puml/format-link-label (puml/link {} {}))
+           "")))
+  (testing "Does have link"
+    (is (= (puml/format-link-label (puml/link {} {} {:label "test-label"}))
+           " : test-label"))))
