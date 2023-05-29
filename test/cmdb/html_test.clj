@@ -9,8 +9,8 @@
            "<a  href=\"http://some.url/\">this is text</a>")))
   (testing "a with opts"
     (is (= (html/to-html
-            (html/a "this is text" "http://some.url/" {:id "my-link"}))
-            "<a id=\"my-link\" href=\"http://some.url/\">this is text</a>"))))
+            (html/a "this is text" "http://some.url/" {:id "my-link" :style {:backgroundColor "red"}}))
+            "<a id=\"my-link\" style=\"backgroundColor: red\" href=\"http://some.url/\">this is text</a>"))))
 
 (deftest format-opts
   (testing "Has opts"
