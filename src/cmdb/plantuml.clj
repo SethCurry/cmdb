@@ -1,10 +1,17 @@
 (ns cmdb.plantuml
   (:require [clojure.string :as string]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [cmdb.util :as util])
   (:import (net.sourceforge.plantuml SourceStringReader)))
 
 (defprotocol PUMLObject
   (to-uml [this]))
+
+(defn is-valid-link-direction?
+ [direction]
+  (if (util/in? ["up" "down" "left" "right"] direction)
+    true
+    false))
 
 (defn link-label
   [lnk]
@@ -49,6 +56,7 @@
 
 (defrecord LinkOptions [direction])
 
+; TODO validate that link direction is valid
 (defn link
   ([from to] (->Link from to {}))
   ([from to opts] (->Link from to opts)))
