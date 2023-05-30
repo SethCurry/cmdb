@@ -52,8 +52,17 @@
            "[test1] -up-> [test2] : test-label"))))
 
 (t/deftest is-valid-link-direction
-  (t/testing "is valid"
+  (t/testing "is valid - up"
     (t/is (= (puml/is-valid-link-direction? "up")
+             true)))
+  (t/testing "is valid - down"
+    (t/is (= (puml/is-valid-link-direction? "down")
+             true)))
+  (t/testing "is valid - left"
+    (t/is (= (puml/is-valid-link-direction? "left")
+             true)))
+  (t/testing "is valid - right"
+    (t/is (= (puml/is-valid-link-direction? "right")
              true)))
   (t/testing "is not valid"
     (t/is (= (puml/is-valid-link-direction? "diagonal")

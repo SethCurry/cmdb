@@ -11,4 +11,5 @@
       (t/is
        (and
         (= (get (first @coll-Team) :name) "test-team")
-        (= (count @coll-Team) 1))))))
+        (= (count @coll-Team) 1)
+        (instance? Team (first @coll-Team)))))))
