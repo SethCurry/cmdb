@@ -35,7 +35,11 @@
            [children opts]
   HTML
   (to-html [this]
-    (str "<div " (format-opts (get this :opts)) ">" (string/join "\n" (map to-html (get this :children))) "</div>")))
+    (str "<div "
+         (format-opts (get this :opts))
+         ">"
+         (string/join "\n" (map to-html (get this :children)))
+         "</div>")))
 (def div ->Div)
 
 (defrecord H1

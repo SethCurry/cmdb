@@ -50,3 +50,11 @@
              (puml/->Component "test2" {})
              {:label "test-label" :direction "up"}))
            "[test1] -up-> [test2] : test-label"))))
+
+(t/deftest is-valid-link-direction
+  (t/testing "is valid"
+    (t/is (= (puml/is-valid-link-direction? "up")
+             true)))
+  (t/testing "is not valid"
+    (t/is (= (puml/is-valid-link-direction? "diagonal")
+             false))))
