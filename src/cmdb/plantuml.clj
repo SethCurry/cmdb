@@ -8,12 +8,14 @@
   (to-uml [this]))
 
 (defn is-valid-link-direction?
+  "Returns true if the provided string is a valid attribute"
  [direction]
   (if (util/in? ["up" "down" "left" "right"] direction)
     true
     false))
 
 (defn link-label
+  "Returns the label of the provided Link, or an empty string if it has none"
   [lnk]
   (let [lbl (get (get lnk :opts) :label)]
     (if (nil? lbl)
@@ -21,12 +23,28 @@
     lbl)))
 
 (defn link-has-label?
+  "Returns true if the provided Link has a label"
   [lnk]
   (if (string/blank? (link-label lnk))
     false
     true))
 
+(defn link-direction
+  "Returns the direction of the provided link, or an empty string it has none"
+  [lnk]
+  (let [link-dir (get (get lnk :opts) :direction)]
+    (if (nil? link-dir)
+      ""
+      link-dir)))
+
+(defn has-link-direction?
+  [lnk]
+  (if (string/blank? (link-direction lnk))
+    false
+    true))
+
 (defn quote-name
+  "Quotes the :name attribute of a provided object"
   [obj]
   (if (string/includes? (get obj :name) " ")
     (str "\"" (get obj :name) "\"")
