@@ -1,50 +1,50 @@
 (ns cmdb.plantuml-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :as t]
             [cmdb.plantuml :as puml]))
 
 
-(deftest quote-name
-  (testing "Quoting a name without a space"
-    (is (=
+(t/deftest quote-name
+  (t/testing "Quoting a name without a space"
+    (t/is (=
          (puml/quote-name (puml/->Component "no-space" {}))
          "no-space")))
-  (testing "Quoting a name with a space"
-    (is (=
+  (t/testing "Quoting a name with a space"
+    (t/is (=
          (puml/quote-name (puml/->Component "has space" {}))
          (str "\"has space\"")))))
 
-(deftest link-label
-  (testing "Normal getting link label"
-    (is (= (puml/link-label (puml/->Link {} {} {:label "test-label"}))
+(t/deftest link-label
+  (t/testing "Normal getting link label"
+    (t/is (= (puml/link-label (puml/->Link {} {} {:label "test-label"}))
        "test-label")))
-  (testing "link has no label"
-    (is (= (puml/link-label (puml/->Link {} {} {}))
+  (t/testing "link has no label"
+    (t/is (= (puml/link-label (puml/->Link {} {} {}))
            ""))))
 
-(deftest format-link-label
-  (testing "Does not have link"
-    (is (= (puml/format-link-label (puml/link {} {}))
+(t/deftest format-link-label
+  (t/testing "Does not have link"
+    (t/is (= (puml/format-link-label (puml/link {} {}))
            "")))
-  (testing "Does have link"
-    (is (= (puml/format-link-label (puml/link {} {} {:label "test-label"}))
+  (t/testing "Does have link"
+    (t/is (= (puml/format-link-label (puml/link {} {} {:label "test-label"}))
            " : test-label"))))
 
-(deftest Link-to-uml
-  (testing "Does not have label"
-    (is (= (puml/to-uml
+(t/deftest Link-to-uml
+  (t/testing "Does not have label"
+    (t/is (= (puml/to-uml
             (puml/link
              (puml/->Component "test1" {})
              (puml/->Component "test2" {})))
            "[test1] --> [test2]")))
-  (testing "Does have label"
-    (is (= (puml/to-uml
+  (t/testing "Does have label"
+    (t/is (= (puml/to-uml
             (puml/link
              (puml/->Component "test1" {})
              (puml/->Component "test2" {}) 
              {:label "test-label"}))
            "[test1] --> [test2] : test-label")))
-  (testing "Has direction"
-    (is (= (puml/to-uml
+  (t/testing "Has direction"
+    (t/is (= (puml/to-uml
             (puml/link
              (puml/->Component "test1" {})
              (puml/->Component "test2" {})

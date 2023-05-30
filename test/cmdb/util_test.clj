@@ -1,9 +1,9 @@
 (ns cmdb.util-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :as t]
             [cmdb.util :as util]))
 
-(deftest in?
-  (testing "Is in"
-    (is (util/in? ["one" "two" "three"] "two")))
-  (testing "not in"
-    (is (not (util/in? ["one" "two" "three"] "four")))))
+(t/deftest in?
+  (t/testing "Is in"
+    (t/is (util/in? ["one" "two" "three"] "two")))
+  (t/testing "not in"
+    (t/is (not (util/in? ["one" "two" "three"] "four")))))

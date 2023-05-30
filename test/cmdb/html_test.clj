@@ -1,21 +1,21 @@
 (ns cmdb.html-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :as t]
             [cmdb.html :as html]))
 
-(deftest a-simple
-  (testing "Simple HTML a entry"
-    (is (= (html/to-html
+(t/deftest a-simple
+  (t/testing "Simple HTML a entry"
+    (t/is (= (html/to-html
             (html/a "this is text" "http://some.url/" {}))
            "<a  href=\"http://some.url/\">this is text</a>")))
-  (testing "a with opts"
-    (is (= (html/to-html
+  (t/testing "a with opts"
+    (t/is (= (html/to-html
             (html/a "this is text" "http://some.url/" {:id "my-link" :style {:backgroundColor "red"}}))
             "<a id=\"my-link\" style=\"backgroundColor: red\" href=\"http://some.url/\">this is text</a>"))))
 
-(deftest format-opts
-  (testing "Has opts"
-    (is (= (html/format-opts {:class "test-class"})
+(t/deftest format-opts
+  (t/testing "Has opts"
+    (t/is (= (html/format-opts {:class "test-class"})
            "class=\"test-class\"")))
-  (testing "No opts"
-    (is (= (html/format-opts {})
+  (t/testing "No opts"
+    (t/is (= (html/format-opts {})
            ""))))
